@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Essat </title>
+    <meta charset="utf-8">
+    <link href="bootstrap4/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script>
+        var xhr = new XMLHttpRequest();
+        function charger() {
+            xhr.open("GET", "https://appessat707.000webhostapp.com/pfes.php", true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    afficher(xhr.responseXML);
+                }
+            }
+        }
+        function afficher(data) {
+
+            var tab = document.getElementById("tab");
+            var pp = data.getElementsByTagName('pfe');
+            tab.innerHTML = "";
+            for (var i = 0; i < pp.length; i++) {
+                 
+                var tr = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var c1 = document.createTextNode(pp[i].getAttribute("id"));
+                td1.appendChild(c1);
+                tr.appendChild(td1);
+                
+                var td2 = document.createElement("td");
+                var c2 = document.createTextNode(pp[i].getAttribute("titre"));
+                td2.appendChild(c2);
+                tr.appendChild(td2);
+                var td3 = document.createElement("c3");
+                var c3 = document.createTextNode(pp[i].getAttribute("type"));
+                
+                td3.appendChild(c3);
+                tr.appendChild(td3);
+                
+
+                tab.appendChild(tr);
+            }
+        }
+       function reseau (){
+
+        xhr.open("GET", "https://appessat707.000webhostapp.com/pfespartypes.php?type=reseaux", true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    afficher(xhr.responseXML);
+                }
+            }
+        
+       }
+       function telecom (){
+
+    xhr.open("GET","https://appessat707.000webhostapp.com/pfespartypes.php?type=Telecom", true);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            afficher(xhr.responseXML);
+        }
+    }
+
+}
+
+function dev (){
+
+xhr.open("GET", "https://appessat707.000webhostapp.com/pfespartypes.php?type=Developpement", true);
+xhr.send();
+xhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        afficher(xhr.responseXML);
+    }
+}
+
+}
+
+function embarque (){
+
+xhr.open("GET","https://appessat707.000webhostapp.com/pfespartypes.php?type=Embarques" , true);
+xhr.send();
+xhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        afficher(xhr.responseXML);
+    }
+}
+
+}
+
+
+
+    </script>
+</head>
+
+<body onload="charger()">
+
+    <div class="container-fluid ">
+
+
+        <div class="row">
+            <div class="col ">
+                <div class=" card card-header bg-primary text-white ">
+                    <h1> Catalogue des PFEs (ESSAT)</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 mt-2">
+
+
+                <li class="list-group-item list-group-item active">
+                    <a href="#" class="text-dark btn" onclick="charger()"> <i class='fab fa-microsoft' style='font-size:24px'> </i>
+                        Tous les PFEs &nbsp</a>
+                    <span class="badge badge-pill badge-warning">13</span></li>
+                <li class="list-group-item list-group-item">
+                    <a href=" #" class="text-dark btn " onclick="telecom()" >
+                        <i class='fab fa-microsoft' style='font-size:24px'> </i>
+                        PFEs Télecom </a>
+                    <span class=" badge badge-pill badge-primary" >9</span></li>
+                <li class="list-group-item list-group-item">
+                    <a href=" #" class="text-dark btn " onclick="dev()">
+                        <i class='fab fa-microsoft' style='font-size:24px'> </i>
+                        PFEs Développement </a>
+                    <span class="badge badge-pill badge-primary">9</span> </li>
+                <li class="list-group-item list-group-item">
+                    <a href=" #" class="text-dark btn " onclick="reseau()">
+                        <i class='fab fa-microsoft' style='font-size:24px'> </i>
+                        PFEs Réseaux </a>
+                    <span class="badge badge-pill badge-primary">9</span></li>
+                <li class="list-group-item list-group-item">
+                    <a href=" #" class="text-dark btn " onclick="embarque()">
+                        <i class='fab fa-microsoft' style='font-size:24px'> </i>
+                        PFEs Embarqués et IOT</a><span class="badge badge-pill badge-primary">9</span></li>
+            </div>
+
+            <div class="col row mt-2 ">
+
+                <div class="col">
+                    <table class=" table table-bordered">
+                    <li class="list-group-item list-group-item bg-success ">
+                        <a href="#" class="text-white">liste des PFEs</a>
+                    </li>
+
+                   
+                           <thead>
+                        <tr class="table-active col">
+                            <th class="col-1">id</th>
+                            <th class="col-9">titre</th>
+                            <th class="col-2">type</th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="col" id="tab">
+
+
+                        </tbody>
+
+
+
+                    </table>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>
